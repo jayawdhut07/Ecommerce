@@ -2,6 +2,8 @@ package com.abc.ecommerce.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,20 +19,29 @@ import org.springframework.web.bind.annotation.RestController;
 import com.abc.ecommerce.entity.Producttb;
 import com.abc.ecommerce.service.ProductService;
 
-@RestController
-@RequestMapping("/product")
-public class ProductController {
 
+@RestController
+@RequestMapping("/product")     //When @RequestMapping is used on class level it creates a base URI for which the controller will be used. 
+public class ProductController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+	
 	@Autowired
 	private ProductService productService;
 	
 	@PostMapping("/save")
 	public ResponseEntity<Producttb> addProduct(@RequestBody Producttb product) {
 		
+		logger.debug("Product Controller - Add Product Called");
+		
 		Producttb newProduct = productService.saveProduct(product);
 		
 		ResponseEntity<Producttb> responseEntity = new ResponseEntity<>(newProduct,HttpStatus.CREATED);
 		
+		logger.info("New Product is saved with Id : ");
+		
+		logger.debug("Product Controller - Add Product Called");
+
 		return responseEntity;		
 		
 	}

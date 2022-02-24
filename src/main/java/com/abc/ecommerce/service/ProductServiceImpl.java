@@ -11,14 +11,14 @@ import com.abc.ecommerce.exception.ProductNotFoundException;
 import com.abc.ecommerce.repository.ProductRepository;
 
 @Service
-public class ProductServcieImpl implements ProductService {
+public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	private ProductRepository productRepository;
 
 	@Override
 	public Producttb saveProduct(Producttb  product) {
-	
+	    
 		Producttb savedProduct = productRepository.save(product);
 			
 		return savedProduct;
